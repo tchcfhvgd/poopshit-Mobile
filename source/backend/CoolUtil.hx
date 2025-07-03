@@ -38,6 +38,8 @@ class CoolUtil {
 		ClientPrefs.loadPrefs();
 
 		Highscore.load();
+		
+		MobileData.init();
 
 		if(FlxG.save.data != null && FlxG.save.data.fullscreen) 
 			FlxG.fullscreen = FlxG.save.data.fullscreen;
@@ -218,5 +220,14 @@ class CoolUtil {
 		#end
 
 		return isOBS;
+	}
+	
+	public static function showPopUp(message:String, title:String):Void
+	{
+		/*#if android
+		AndroidTools.showAlertDialog(title, message, {name: "OK", func: null}, null);
+		#else*/
+		FlxG.stage.window.alert(message, title);
+		//#end
 	}
 }

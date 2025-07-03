@@ -6,6 +6,18 @@ import flixel.input.gamepad.FlxGamepadInputID;
 
 // Add a variable here and it will get automatically saved
 class SaveVariables {
+	// Mobile and Mobile Controls Releated
+	public var extraButtons:String = "NONE"; // mobile extra button option
+	public var hitboxPos:Bool = true; // hitbox extra button position option
+	public var dynamicColors:Bool = true; // yes cause its cool -Karim
+	public var controlsAlpha:Float = FlxG.onMobile ? 0.6 : 0;
+	public var screensaver:Bool = false;
+	public var wideScreen:Bool = false;
+	#if android
+	public var storageType:String = "EXTERNAL_DATA";
+	#end
+	public var hitboxType:String = "Gradient";
+	
 	//poopshitter prefs
 	public var permaUnlocks:Map<String, Bool> = [
 		'eggster' => false, 
