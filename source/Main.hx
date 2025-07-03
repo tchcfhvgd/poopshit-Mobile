@@ -1,7 +1,7 @@
 package;
 
 import flixel.graphics.FlxGraphic;
-
+import lime.system.System as LimeSystem;
 import flixel.FlxGame;
 import flixel.FlxState;
 import openfl.Assets;

@@ -53,15 +53,13 @@ jobs:
           haxelib setup ~/haxelib
           haxelib git hxcpp https://github.com/th2l-devs/hxcpp
           haxelib git lime https://github.com/tchcfhvgd/lime
-          haxelib install openfl 9.3.3
+          haxelib install openfl 9.2.2
           haxelib install hscript
           haxelib install flixel-ui 2.5.0
-          haxelib install flixel 5.5.0
-          haxelib install flixel-addons 3.2.1
+          haxelib install flixel 5.3.1
+          haxelib install flixel-addons 3.1.1
           haxelib install hxvlc 1.7.1
           haxelib install tjson
-          haxelib git SScript https://github.com/tchcfhvgd/SScript
-          haxelib git linc_luajit https://github.com/th2l-devs/linc_luajit
           haxelib list
       
       - name: Setup Lime
