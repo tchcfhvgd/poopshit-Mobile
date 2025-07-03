@@ -59,6 +59,7 @@ jobs:
           haxelib install flixel 5.5.0
           haxelib install flixel-addons 3.2.1
           haxelib install hxvlc 1.7.1
+          haxelib install tjson
           haxelib git SScript https://github.com/tchcfhvgd/SScript
           haxelib git linc_luajit https://github.com/th2l-devs/linc_luajit
           haxelib list
