@@ -34,6 +34,13 @@ import android.os.Build.VERSION_CODES as AndroidVersionCode;
 import android.os.BatteryManager as AndroidBatteryManager;
 #end
 
+#if sys
+import sys.*;
+import sys.io.*;
+#elseif js
+import js.html.*;
+#end
+
 import backend.Paths;
 import backend.Controls;
 import backend.CoolUtil;
@@ -43,6 +50,7 @@ import backend.UTTransitionableState as Transition;
 import backend.ClientPrefs;
 import backend.Conductor;
 import backend.BaseStage;
+import backend.Mods;
 import backend.Trophies;
 import mobile.backend.StorageUtil;
 
