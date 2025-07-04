@@ -136,6 +136,8 @@ class ControlsSubState extends MusicBeatSubstate
 			}
 			leg += h.length;
 		}
+		
+		addTouchPad("NONE", "B");
 	}
 
 	var lastID:Int = 0;
@@ -312,7 +314,7 @@ class ControlsSubState extends MusicBeatSubstate
 		var leftPress:Bool = FlxG.keys.justPressed.A || FlxG.keys.justPressed.LEFT || FlxG.gamepads.anyJustPressed(DPAD_LEFT) || FlxG.gamepads.anyJustPressed(LEFT_STICK_DIGITAL_LEFT);
 		var rightPress:Bool = FlxG.keys.justPressed.D || FlxG.keys.justPressed.RIGHT || FlxG.gamepads.anyJustPressed(DPAD_RIGHT) || FlxG.gamepads.anyJustPressed(LEFT_STICK_DIGITAL_RIGHT);
 		var accPress:Bool = FlxG.keys.justPressed.SPACE || FlxG.keys.justPressed.ENTER || FlxG.gamepads.anyJustPressed(START) || FlxG.gamepads.anyJustPressed(A);
-		var bckPress:Bool = FlxG.keys.justPressed.ESCAPE || FlxG.keys.pressed.BACKSPACE || FlxG.gamepads.anyJustPressed(B);
+		var bckPress:Bool = FlxG.keys.justPressed.ESCAPE || FlxG.keys.pressed.BACKSPACE || FlxG.gamepads.anyJustPressed(B) || touchPad.buttonB.justPressed;
 		var ctrlPress:Bool = FlxG.keys.justPressed.CONTROL || FlxG.gamepads.anyJustPressed(LEFT_SHOULDER) || FlxG.gamepads.anyJustPressed(RIGHT_SHOULDER);
 		
 		if(!binding) {

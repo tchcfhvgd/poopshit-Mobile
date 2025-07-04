@@ -120,6 +120,9 @@ class PauseSubState extends MusicBeatSubstate {
             Trophies.unlockTrophy(pausechar);
             add(new TrophyPopup(pausechar, cameras[cameras.length - 1]));
 		}
+		
+		addTouchPad("LEFT_RIGHT", "A");
+		addTouchPadCamera();
 	}
 
 	var holdTime:Float = 0;
@@ -131,6 +134,12 @@ class PauseSubState extends MusicBeatSubstate {
 		if (pauseMusic.volume < 0.5)
 			pauseMusic.volume += 0.01 * elapsed;
 
+		if (touchPad == null) //sometimes it dosent add the tpad, hopefully this fixes it
+		{
+			addTouchPad("LEFT_RIGHT", "A");
+			addTouchPadCamera();
+		}
+		
 		super.update(elapsed);
 
 		var upP = controls.UI_LEFT_P;

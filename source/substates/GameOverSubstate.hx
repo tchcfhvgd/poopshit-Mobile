@@ -118,6 +118,9 @@ class GameOverSubstate extends MusicBeatSubstate {
                 add(new TrophyPopup('krill_yourself', PlayState.instance.camOther));
             });
 		}
+		
+		addTouchPad("NONE", "A_B");
+		addTouchPadCamera();
 	}
 
 	override function update(elapsed:Float) {

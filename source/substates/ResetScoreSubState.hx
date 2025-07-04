@@ -78,6 +78,9 @@ class ResetScoreSubState extends MusicBeatSubstate {
 		add(soul);
 
 		updateOptions();
+		
+		addTouchPad("LEFT_RIGHT", "A_B");
+		addTouchPadCamera();
 	}
 
 	var selectedSmth:Bool = false;
@@ -112,6 +115,12 @@ class ResetScoreSubState extends MusicBeatSubstate {
 				close();
 			}
 		}
+		
+		if (touchPad == null){ //sometimes it dosent add the tpad, hopefully this fixes it
+		addTouchPad("LEFT_RIGHT", "A_B");
+		addTouchPadCamera();
+		}
+		
 		super.update(elapsed);
 	}
 

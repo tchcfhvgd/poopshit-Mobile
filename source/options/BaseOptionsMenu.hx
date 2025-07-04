@@ -108,6 +108,8 @@ class BaseOptionsMenu extends MusicBeatSubstate {
 			memTwns.set(i*2, FlxTween.tween(member, {x: memX[i*2]}, 1, {ease: FlxEase.sineOut}));
 			memTwns.set((i*2) + 1, FlxTween.tween(member, {alpha: memX[(i*2)+1]}, 1, {ease: FlxEase.sineOut}));
 		}
+		
+		addTouchPad("LEFT_FULL", "A_B_C");
 	}
 
 	public function addOption(option:Option) {
@@ -248,7 +250,7 @@ class BaseOptionsMenu extends MusicBeatSubstate {
 					}
 				}
 
-				if(controls.RESET)
+				if(controls.RESET || touchPad.buttonC.justPressed)
 				{
 					for (i in 0...optionsArray.length)
 					{

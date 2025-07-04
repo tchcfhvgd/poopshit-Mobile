@@ -80,6 +80,9 @@ class Overworld extends MusicBeatState {
             if (tromph[3] == 'down-to-the-bone_fc') continue;
             if (!Trophies.getTrophyStats(tromph[3], UNLOCKED)) doneFunValues.set('dttb', false);
         }
+        
+        addTouchPad("LEFT_FULL", "Z_X_C");
+        addTouchPadCamera();
     }
 
     var escapeTimer:FlxTimer;
@@ -106,7 +109,7 @@ class Overworld extends MusicBeatState {
                         if (player.y < 530) campoint.y = player.y + (player.height / 2);
                         else campoint.y = bg.height - 125;
 
-                        if ((controls.ACCEPT || controls.DIA_NEXT) && player.y <= 102 && player.curDir == 2) {
+                        if ((controls.ACCEPT || controls.DIA_NEXT || touchPad.buttonZ.justPressed) && player.y <= 102 && player.curDir == 2) {
                             if (player.x > 125 && player.x < 175) {
                                 player.inCutscene = true;
                                 diaBox = new DialogueBox(Dialogue.get(map, INTERACT, 0), {player: player, onComplete: function() {
@@ -162,7 +165,7 @@ class Overworld extends MusicBeatState {
                         }
                     }
                 case 'Gaster Room':
-                    if (colHitbox.overlaps(shitter) && controls.ACCEPT && !player.inInv) {
+                    if (colHitbox.overlaps(shitter) && (controls.ACCEPT || touchPad.buttonZ.justPressed) && !player.inInv) {
                         songLoading = true;
                         shitter.playAnim('disappear');
                         FlxG.sound.play(Paths.sound('mystery_go', 'overworld'));
@@ -283,14 +286,14 @@ class Overworld extends MusicBeatState {
                     else if (campoint.x > 745 && !doneSong('constipation')) shitter.y = player.y + 2;
 
                 case 'Scary Skeleton House':
-                    if (controls.ACCEPT && player.char == 'sans-exe' && !canDeleteBox) {
+                    if ((controls.ACCEPT || touchPad.buttonZ.justPressed) && player.char == 'sans-exe' && !canDeleteBox) {
                         player.interact();
                         if ((player.y < 38 && player.x < 100 && player.curDir == 2) || (player.y >= 208 && player.curDir == 1)) {
                             sansEXEfakeDiaBox(0);
                         } else if (player.y < 38 && player.x > 100 && player.curDir == 2) {nextRoom('Scary Sans Room');}
                     }
                     
-                    if ((FlxG.keys.justPressed.SPACE || controls.DIA_NEXT) && canDeleteBox) {
+                    if ((FlxG.keys.justPressed.SPACE || controls.DIA_NEXT || touchPad.buttonX.justPressed) && canDeleteBox) {
                         theDiaTimer.cancel();
                         remove(fakeDiaBox);
                         canDeleteBox = false;
@@ -330,18 +333,18 @@ class Overworld extends MusicBeatState {
                         new FlxTimer().start(19, function(tmr:FlxTimer) {loadSong('too-far');});
                     }
                                     
-                    if (FlxG.keys.justPressed.SPACE && canDeleteBox) {
+                    if ((FlxG.keys.justPressed.SPACE || touchPad.buttonX.justPressed) && canDeleteBox) {
                         theDiaTimer.cancel();
                         remove(fakeDiaBox);
                         canDeleteBox = false;
                     }
 
-                    if (controls.ACCEPT && player.char == 'sans-exe' && !canDeleteBox) player.interact();
+                    if ((controls.ACCEPT || touchPad.buttonZ.justPressed) && player.char == 'sans-exe' && !canDeleteBox) player.interact();
 
                 default:
             }
 
-            if (controls.MENU && !player.inInv && player.char != 'sans-exe' && !player.inCutscene) {    
+            if ((controls.MENU || touchPad.buttonC.justPressed) && !player.inInv && player.char != 'sans-exe' && !player.inCutscene) {    
                 openSubState(new InventoryMenu(camHUD, player, player.y >= campoint.y));
                 player.inInv = true;
             }
@@ -379,6 +382,13 @@ class Overworld extends MusicBeatState {
         super.update(elapsed);
     }
 
+    override function closeSubState() {
+        super.closeSubState();
+        removeTouchPad();
+		addTouchPad("LEFT_FULL", "Z_X_C");
+        addTouchPadCamera();
+    }
+    
     override public function stepHit() {
         super.stepHit();
         if (CoolUtil.checkFUNRange(9,20) && eatCone && !doneEvent('sansCone') && shitter != null) {

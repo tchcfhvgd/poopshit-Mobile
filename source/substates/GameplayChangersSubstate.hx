@@ -133,6 +133,9 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 
 		changeSelection();
 		reloadCheckboxes();
+		
+		addTouchPad("LEFT_FULL", "A_B_C");
+		addTouchPadCamera();
 	}
 
 	var nextAccept:Int = 5;
@@ -263,7 +266,7 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 				}
 			}
 
-			if(controls.RESET)
+			if(controls.RESET || touchPad.buttonC.justPressed)
 			{
 				for (i in 0...optionsArray.length)
 				{
@@ -298,6 +301,11 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		if(nextAccept > 0) {
 			nextAccept -= 1;
 		}
+		if (touchPad == null){ //sometimes it dosent add the tpad, hopefully this fixes it
+		addTouchPad("LEFT_FULL", "A_B_C");
+		addTouchPadCamera();
+		}
+		
 		super.update(elapsed);
 	}
 

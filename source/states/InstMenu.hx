@@ -60,6 +60,8 @@ class InstMenu extends MusicBeatState {
             uSuck.y = FlxG.height - uSuck.height - 7.5;
         }
 
+        addTouchPad("NONE", "A");
+        
         super.create();
     }
     

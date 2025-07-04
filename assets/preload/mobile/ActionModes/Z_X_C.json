@@ -1,0 +1,25 @@
+{
+  "buttons": [
+    {
+      "button": "buttonC",
+      "graphic": "c",
+      "x": 1156,
+      "y": 396,
+      "color": "0x44FF00"
+    },
+    {
+      "button": "buttonX",
+      "graphic": "x",
+      "x": 1032,
+      "y": 496,
+      "color": "0x99062D"
+    },
+    {
+      "button": "buttonZ",
+      "graphic": "z",
+      "x": 908,
+      "y": 596,
+      "color": "0xCCB98E"
+    }
+  ]
+}

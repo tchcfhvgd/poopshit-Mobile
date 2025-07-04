@@ -169,6 +169,10 @@ class NotesSubState extends MusicBeatSubstate
 			memTwns.set(i*2, FlxTween.tween(member, {x: memX[i*2]}, 1, {ease: FlxEase.sineOut}));
 			memTwns.set((i*2) + 1, FlxTween.tween(member, {alpha: memX[(i*2)+1]}, 1, {ease: FlxEase.sineOut}));
 		}
+		
+		addTouchPad("NONE", "A_B_C");
+		touchPad.buttonC.x = 0;
+		touchPad.buttonC.y = FlxG.height - 135;
 	}
 
 	function updateTip() {
@@ -477,7 +481,7 @@ class NotesSubState extends MusicBeatSubstate
 					}
 				} 
 			}
-			else if(controls.RESET && hexTypeNum < 0)
+			else if((controls.RESET || touchPad.buttonC.justPressed) && hexTypeNum < 0)
 			{
 				if(FlxG.keys.pressed.SHIFT || FlxG.gamepads.anyJustPressed(LEFT_SHOULDER))
 				{

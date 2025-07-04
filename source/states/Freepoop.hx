@@ -152,6 +152,8 @@ class Freepoop extends MusicBeatState {
             }
         }
 
+        addTouchPad("LEFT_FULL", "A_C");
+        
         super.create();
         
         weeking();
@@ -162,6 +164,8 @@ class Freepoop extends MusicBeatState {
         songtxt.alpha = (Highscore.getScore(songs[curSong].song, 0) < 1 && songs[curSong].overworld != '') ? 0.6 : 1;
         btns[0].alpha = (songs[curSong].overworld == '') ? 0.6 : 1;
         super.closeSubState();
+        removeTouchPad();
+		addTouchPad("LEFT_FULL", "A_C");
     }
     
     override function update(elapsed:Float) {
@@ -189,9 +193,10 @@ class Freepoop extends MusicBeatState {
         if (controls.UI_UP_P) selecting('Up');
         if (controls.UI_DOWN_P) selecting('Down');
 
-        if (controls.RESET) {
+        if (controls.RESET || touchPad.buttonC.justPressed) {
             persistentUpdate = false;
 			openSubState(new ResetScoreSubState(songs[curSong].song, songs[curSong].songChar, songs[curSong].charOffsets));
+			removeTouchPad();
         } else if (controls.ACCEPT) {
             FlxG.sound.play(Paths.sound('confirm'));
             new FlxTimer().start(0.2, function(tmr:FlxTimer) {

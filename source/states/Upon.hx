@@ -93,7 +93,8 @@ class Upon extends MusicBeatState {
         add(theblack);
         FlxTween.tween(theblack, {alpha: 1}, 0.25, {onComplete: function(twn:FlxTween) {remove(theblack);}});
         
-
+        addTouchPad("NONE", "A");
+        
         super.create();
     }
 

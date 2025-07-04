@@ -2,10 +2,11 @@ package options;
 
 import states.Freepoop;
 import backend.StageData;
+import mobile.substates.MobileControlSelectSubState;
 import flixel.addons.display.shapes.FlxShapeCircle;
 
 class OptionsState extends MusicBeatState {
-	var options:Array<String> = ['Exit', 'Language', 'Note Colors', 'Control Config', 'Note Offset', 'Graphics, Visuals, and UI', 'Gameplay', 'Settings'];
+	var options:Array<String> = ['Exit', 'Language', 'Note Colors', 'Control Config', 'Note Offset', 'Graphics, Visuals, and UI', 'Gameplay', 'Settings', 'Mobile Options'];
 	var optionsY:Array<Float> = [0, 50, 115, 130, 145, 195, 210, 225];
 	private var particles:FlxTypedGroup<SetParticle>;
 	private var ass:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
@@ -42,6 +43,9 @@ class OptionsState extends MusicBeatState {
 		}
 		mainActive = false;
 
+		persistentUpdate = false;
+		if (label != "Exit") removeTouchPad();
+		
 		switch(label) {
 			case 'Exit':
 				if(beatTwn != null) beatTwn.cancel();
@@ -61,6 +65,8 @@ class OptionsState extends MusicBeatState {
 				openSubState(new options.GameplaySettingsSubState());
 			case 'Settings':
 				openSubState(new options.SettingsSettingsSubState());
+			case 'Mobile Options':
+				openSubState(new mobile.options.MobileOptionsSubState());
 		}
 	}
 
@@ -158,6 +164,8 @@ class OptionsState extends MusicBeatState {
 		changeSelection();
 		ClientPrefs.saveSettings();
 
+		addTouchPad("LEFT_FULL", "A_B_X_Y");
+		
 		super.create();
 	}
 
@@ -174,6 +182,10 @@ class OptionsState extends MusicBeatState {
 	override function closeSubState() {
 		super.closeSubState();
 		ClientPrefs.saveSettings();
+		controls.isInSubstate = false;
+        removeTouchPad();
+		addTouchPad("LEFT_FULL", "A_B_X_Y");
+		persistentUpdate = true;
 	}
 
 	var suntwn:FlxTween;
@@ -244,7 +256,7 @@ class OptionsState extends MusicBeatState {
 						updateOffset();
 					}
 		
-					if(controls.RESET) {
+					if(controls.RESET || touchPad.buttonY.justPressed) {
 						holdTime = 0;
 						offset = 0;
 						updateOffset();
@@ -255,6 +267,12 @@ class OptionsState extends MusicBeatState {
 					if (controls.ACCEPT) openSelectedSubstate(options[curSelected]);
 			}
 
+			if (touchPad.buttonX.justPressed || FlxG.keys.justPressed.CONTROL && controls.mobileC)
+		{
+			persistentUpdate = false;
+			openSubState(new MobileControlSelectSubState());
+		}
+			
 			if (controls.BACK) openSelectedSubstate('Exit');
 		}
 		

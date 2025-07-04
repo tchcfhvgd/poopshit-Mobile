@@ -72,6 +72,9 @@ class Undercreds extends MusicBeatState {
 		add(rightArrow);
 
         changeSelection();
+        
+        addTouchPad("LEFT_RIGHT", "A_B");
+        
         super.create();
     }
 

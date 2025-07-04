@@ -93,6 +93,9 @@ class InventoryMenu extends MusicBeatSubstate {
         changeSelectionMain();
 
         new FlxTimer().start(0.1, function(tmr:FlxTimer) {pressedMenu = false;});
+        
+        addTouchPad("UP_DOWN", "Z_X_C");
+		addTouchPadCamera();
     }
 
     override function update(elapsed:Float) {
@@ -108,7 +111,7 @@ class InventoryMenu extends MusicBeatSubstate {
             }
         }
 
-        if (controls.ACCEPT) {
+        if (controls.ACCEPT || touchPad.buttonZ.justPressed) {
             if (!inSubMenu && (diabox == null || !diabox.exists)) {
                 FlxG.sound.play(Paths.sound('confirm'));
                 makeBox(mainList[curSelectedMain]);
@@ -138,7 +141,7 @@ class InventoryMenu extends MusicBeatSubstate {
             }
         }
 
-        if (controls.BACK && (diabox == null || !diabox.exists)) {
+        if ((controls.BACK || touchPad.buttonX.justPressed) && (diabox == null || !diabox.exists)) {
             if (!inSubMenu) {
                 close();
                 player.idle();
@@ -150,7 +153,7 @@ class InventoryMenu extends MusicBeatSubstate {
             }
         }
 
-        if (controls.MENU && (diabox == null || !diabox.exists) && !pressedMenu) {
+        if ((controls.MENU || touchPad.buttonC.justPressed) && (diabox == null || !diabox.exists) && !pressedMenu) {
             close();
             player.idle();
         }

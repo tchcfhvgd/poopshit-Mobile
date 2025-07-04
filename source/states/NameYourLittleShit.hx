@@ -154,6 +154,8 @@ class NameYourLittleShit extends MusicBeatState
         yes.alpha = 0.00001;
         add(yes);
 
+        addTouchPad("LEFT_FULL", "A_B");
+        
         super.create();
     }
 
