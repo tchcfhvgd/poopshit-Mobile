@@ -63,6 +63,7 @@ class MobileOptionsSubState extends BaseOptionsMenu
 			'If checked, the phone will sleep after going inactive for few seconds.\n(The time depends on your phone\'s options)', 'screensaver', 'bool');
 		option.onChange = () -> lime.system.System.allowScreenTimeout = curOption.getValue();
 		addOption(option);
+		#end
 
 		if (MobileData.mode == 3)
 		{
