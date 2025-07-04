@@ -54,7 +54,6 @@ class MobileOptionsSubState extends BaseOptionsMenu
 		option.onChange = () ->
 		{
 			touchPad.alpha = curOption.getValue();
-			ClientPrefs.toggleVolumeKeys();
 		};
 		addOption(option);
 
