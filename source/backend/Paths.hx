@@ -524,9 +524,6 @@ class Paths
 	
 	public static function readDirectory(directory:String):Array<String>
 	{
-		#if MODS_ALLOWED
-		return FileSystem.readDirectory(directory);
-		#else
 		var dirs:Array<String> = [];
 		for(dir in Assets.list().filter(folder -> folder.startsWith(directory)))
 		{
@@ -540,6 +537,5 @@ class Paths
 			}
 		}
 		return dirs.map(dir -> dir.substr(dir.lastIndexOf("/") + 1));
-		#end
 	}
 }
